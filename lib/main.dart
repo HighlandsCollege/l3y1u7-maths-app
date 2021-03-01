@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _question = '';
   int _correct = 0;
+  int _totalAnswers = 0;
   int _score = 0;
   List<int> _buffer = [];
 
@@ -54,7 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _score++;
       });
-    }
+    } 
+
+    setState(() {
+      _totalAnswers++;
+    });
 
     _generateQuestion();
   }
@@ -102,8 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(height: 20),
             Text(
-                'Score: $_score'
+                'Score: $_score / $_totalAnswers'
             ),
             Text(
                 'Question: $_question'
@@ -137,7 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Center(
                 child: Text('Reset'),
               ),
-            )
+            ),
+            Container(height: 20)
           ],
         ),
       )
