@@ -10,12 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Awesome maths game',
+      home: MyHomePage(title: 'mY AWeSomE MaTHs gAMe'),
     );
   }
 }
@@ -31,10 +27,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _question = '';
-  int _correct = 0;
-  int _totalAnswers = 0;
-  int _score = 0;
-  List<int> _buffer = [];
+  double _correct = 0;
+  double _totalAnswers = 0;
+  double _score = 0;
+  String _operator = '';
+  List<double> _buffer = [];
 
   @override
   void initState() {
@@ -43,19 +40,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _generateQuestion() async {
-    List<int> list = await _randomInt();
+    List<double> list = await _randomInt();
     setState(() {
-      _question = 'What is ${list[0]} + ${list[1]}?';
+      _question = 'What is ${list[0]} $_operator ${list[1]}?';
       _correct = list[2];
     });
   }
 
-  void _verifyAnswer(int answer) {
+  void _verifyAnswer(double answer) {
     if (answer == _correct) {
       setState(() {
         _score++;
       });
-    } 
+    }
 
     setState(() {
       _totalAnswers++;
@@ -64,12 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
     _generateQuestion();
   }
 
-  void _setBuffer (int correct) async {
+  void _setBuffer(double correct) async {
     var rng = new Random();
-    List<int> buffer = [];
+    List<double> buffer = [];
 
     for (var i = 0; i < 4; i++) {
-      buffer.add(rng.nextInt(20));
+      buffer.add(rng.nextInt(20).toDouble());
     }
 
     buffer[rng.nextInt(3)] = correct;
@@ -79,11 +76,32 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future<List<int>> _randomInt() async {
+  Future<List<double>> _randomInt() async {
     var rng = new Random();
-    int x = rng.nextInt(20);
-    int y = rng.nextInt(20);
-    int correct = x + y;
+
+    double x = rng.nextInt(12).toDouble();
+    double y = rng.nextInt(12).toDouble();
+    double correct;
+
+    switch (rng.nextInt(4)) {
+      case 0:
+        _operator = '+';
+        correct = (x + y).toDouble();
+        break;
+      case 1:
+        _operator = '-';
+        correct = (x - y).toDouble();
+        break;
+      case 2:
+        _operator = '*';
+        correct = (x * y).toDouble();
+        break;
+      case 3:
+        _operator = '÷';
+        correct = x / y;
+        break;
+      default:
+    }
 
     _setBuffer(correct);
 
@@ -94,60 +112,67 @@ class _MyHomePageState extends State<MyHomePage> {
     _generateQuestion();
     setState(() {
       _score = 0;
+      _totalAnswers = 0;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(height: 20),
-            Text(
-                'Score: $_score / $_totalAnswers'
-            ),
-            Text(
-                'Question: $_question'
-            ),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                children: List.generate(4, (index) => Center(
-                  child: GestureDetector(
-                    onTap: () => _verifyAnswer(_buffer[index]),
-                    child: Container(
-                      width: 80,
-                      height: 50,
-                      color: Colors.red,
-                      child: Center(
-                        child: Text(
-                          '${_buffer[index]}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20
-                          ),
-                        ),
-                      )
-                    ),
-                  ),
-                )),
-              )
-            ),
-            GestureDetector(
-              onTap: () => _reset(),
-              child: Center(
-                child: Text('Reset'),
-              ),
-            ),
-            Container(height: 20)
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      )
-    );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(height: 20),
+              Text(
+                'Question: $_question',
+                style: TextStyle(fontSize: 20),
+              ),
+              Text('Score: $_score / $_totalAnswers',
+                  style: TextStyle(fontSize: 16)),
+              Expanded(
+                  child: GridView.count(
+                crossAxisCount: 2,
+                children: List.generate(
+                    4,
+                    (index) => Center(
+                          child: GestureDetector(
+                            onTap: () => _verifyAnswer(_buffer[index]),
+                            child: Container(
+                                width: 80,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    color: Colors.blue[200],
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: Center(
+                                  child: Text(
+                                    '${_buffer[index]}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                )),
+                          ),
+                        )),
+              )),
+              GestureDetector(
+                onTap: () => _reset(),
+                child: Center(
+                  child: Container(
+                      child: Text('Reset'),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.blue[200],
+                          borderRadius: BorderRadius.all(Radius.circular(10)))),
+                ),
+              ),
+              Container(height: 20)
+            ],
+          ),
+        ));
   }
 }
