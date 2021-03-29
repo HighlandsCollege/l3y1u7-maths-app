@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'views/start.dart';
+import 'views/level_1.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Awesome maths game',
-      home: MyHomePage(title: 'mY AWeSomE MaTHs gAMe'),
+      home: Start()
     );
   }
 }
@@ -170,6 +171,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
                 ),
               ),
+              GestureDetector(
+                  onTap: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Level1()))
+                      },
+                  child: Text('level 1')),
               Container(height: 20)
             ],
           ),
