@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'level_1.dart';
 import '../components/wrapper.dart';
+import 'level_3.dart';
 
-class Start extends StatelessWidget {
-  final String mathsLogo = 'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/mathematics_4otb.svg';
+class Level2 extends StatefulWidget {
+  Level2({Key key}) : super(key: key);
 
-  // final Widget svg = SvgPicture.asset(
-  //   mathsLogo,
-  //   semanticsLabel: 'Maths Logo'
-  // );
+  @override
+  _Level2 createState() => _Level2();
+}
+
+class _Level2 extends State<Level2> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _verifyAnswer(ctx) {
+    Navigator.push(
+      ctx,
+      MaterialPageRoute(
+        builder: (ctx) => Level3()
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +34,7 @@ class Start extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Maths App',
+              'Level 2',
               style: GoogleFonts.lato(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -29,7 +42,7 @@ class Start extends StatelessWidget {
               )
             ),
             Text(
-              'by Herbie',
+              'Question: What is 4 + 9?',
               style: GoogleFonts.lato(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -37,19 +50,14 @@ class Start extends StatelessWidget {
               )
             ),
             Spacer(),
-            SvgPicture.network(
-              mathsLogo,
-              placeholderBuilder: (context) => CircularProgressIndicator(),
+            Container(
               height: 200,
+              width: 200,
+              color: Colors.blue,
             ),
             Spacer(),
             GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Level1()
-                )
-              ),
+              onTap: () => _verifyAnswer(context),
               child: Container(
                 width: 150,
                 height: 50,
@@ -63,7 +71,7 @@ class Start extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
                     child: Text(
-                      'Start',
+                      'Verify answer',
                       style: GoogleFonts.lato(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -75,7 +83,7 @@ class Start extends StatelessWidget {
               )
             )
           ],
-        ),
+        )
       )
     );
   }
