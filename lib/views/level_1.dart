@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/wrapper.dart';
+import '../components/progress_bar.dart';
 import 'level_2.dart';
 
 class Level1 extends StatefulWidget {
@@ -11,11 +12,6 @@ class Level1 extends StatefulWidget {
 }
 
 class _Level1 extends State<Level1> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void _verifyAnswer(ctx) {
     Navigator.push(
       ctx,
@@ -49,21 +45,7 @@ class _Level1 extends State<Level1> {
                 color: Colors.grey[200]
               )
             ),
-            Container(
-              width: 200,
-              child: Row(
-                children: [
-                  Container(
-                    height: 10,
-                    width: 200 / 3,
-                    decoration: BoxDecoration(
-                      color: Colors.,
-                      borderRadius: BorderRadius.all(Radius.circular(10))
-                    )
-                  )
-                ],
-              )
-            ),
+            ProgressBar(begin: 0, end: 200 / 3),
             Spacer(),
             Container(
               height: 200,
