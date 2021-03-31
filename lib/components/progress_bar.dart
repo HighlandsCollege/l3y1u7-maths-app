@@ -25,11 +25,20 @@ class _ProgressBarState extends State<ProgressBar> with SingleTickerProviderStat
       vsync: this
     );
 
-    _widthAnimation = Tween<double>(begin: widget.begin, end: widget.end).animate(_controller);
+    _widthAnimation = Tween<double>(
+      begin: widget.begin,
+      end: widget.end
+    ).animate(_controller);
 
     _controller.forward();
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
