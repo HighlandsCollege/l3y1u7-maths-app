@@ -33,6 +33,12 @@ class _ProgressBarState extends State<ProgressBar> with SingleTickerProviderStat
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 10),
