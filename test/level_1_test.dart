@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../lib/views/level_1.dart';
-import 'utils/widget_wrapper.dart';
+import 'utils/test_wrapper.dart';
 
 void main() {
   testWidgets('Finds the correct title', (WidgetTester tester) async {
