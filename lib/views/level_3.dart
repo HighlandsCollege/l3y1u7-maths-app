@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/wrapper.dart';
-import '../components/progress_bar.dart';
 import 'results.dart';
 
 class Level3 extends StatefulWidget {
@@ -50,7 +49,6 @@ class _Level3 extends State<Level3> {
                 color: Colors.grey[200]
               )
             ),
-            ProgressBar(begin: 200 / 3 + 200 / 3, end: 200),
             Spacer(),
             Container(
               height: 200,
