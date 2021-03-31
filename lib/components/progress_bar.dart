@@ -28,7 +28,10 @@ class _ProgressBarState extends State<ProgressBar> with SingleTickerProviderStat
     _widthAnimation = Tween<double>(
       begin: widget.begin,
       end: widget.end
-    ).animate(_controller);
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut
+    ));
 
     _controller.forward();
 

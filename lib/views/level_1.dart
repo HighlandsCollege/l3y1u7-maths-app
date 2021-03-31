@@ -1,3 +1,4 @@
+import 'package:app/components/page_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/wrapper.dart';
@@ -13,12 +14,7 @@ class Level1 extends StatefulWidget {
 
 class _Level1 extends State<Level1> {
   void _verifyAnswer(ctx) {
-    Navigator.push(
-      ctx,
-      MaterialPageRoute(
-        builder: (ctx) => Level2()
-      )
-    );
+    navigate(ctx, Level2());
   }
 
   @override
