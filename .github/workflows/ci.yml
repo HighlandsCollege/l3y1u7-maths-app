@@ -1,4 +1,4 @@
-name: CI - Test and Analayze
+name: CI - Test and Analyze
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test_and_analyze:
-    name: Run Tests and Alayze
+    name: Run Tests and Analyze
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
