@@ -3,7 +3,7 @@ name: CI - Test and Analyze
 on:
   pull_request:
     branches:
-      - staging
+      - main
 
 jobs:
   test_and_analyze:
