@@ -1,3 +1,5 @@
+import 'package:app/components/page_navigator.dart';
+import 'package:app/components/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/wrapper.dart';
@@ -17,12 +19,7 @@ class _Level3 extends State<Level3> {
   }
 
   void _verifyAnswer(ctx) {
-    Navigator.push(
-      ctx,
-      MaterialPageRoute(
-        builder: (ctx) => Results()
-      )
-    );
+    navigate(ctx, Results());
   }
 
   @override
@@ -49,6 +46,7 @@ class _Level3 extends State<Level3> {
                 color: Colors.grey[200]
               )
             ),
+            ProgressBar(begin: 200 / 3 + 200 / 3, end: 200),
             Spacer(),
             Container(
               height: 200,

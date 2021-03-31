@@ -1,3 +1,4 @@
+import 'package:app/components/page_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,11 +7,6 @@ import '../components/wrapper.dart';
 
 class Results extends StatelessWidget {
   final String astronauntLogo = 'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/Astronaut_re_8c33.svg';
-
-  // final Widget svg = SvgPicture.asset(
-  //   mathsLogo,
-  //   semanticsLabel: 'Maths Logo'
-  // );
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +40,7 @@ class Results extends StatelessWidget {
             ),
             Spacer(),
             GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Start()
-                )
-              ),
+              onTap: () => navigate(context, Start()),
               child: Container(
                 width: 150,
                 height: 50,
