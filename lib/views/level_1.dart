@@ -1,4 +1,6 @@
-import 'package:app/components/page_navigator.dart';
+import 'package:app/models/data.dart';
+import '../components/page_navigator.dart';
+import '../services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/wrapper.dart';

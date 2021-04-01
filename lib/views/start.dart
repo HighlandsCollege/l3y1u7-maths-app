@@ -1,12 +1,26 @@
 import 'package:app/components/page_navigator.dart';
+import 'package:app/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'level_1.dart';
 import '../components/wrapper.dart';
 
-class Start extends StatelessWidget {
+class Start extends StatefulWidget {
+  @override
+  _StartState createState() => _StartState();
+}
+
+class _StartState extends State<Start> {
   final String mathsLogo = 'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/mathematics_4otb.svg';
+  bool isLoading;
+
+  @override
+  void initState() {
+    // isLoading = context.read<Services>().questions
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
