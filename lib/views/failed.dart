@@ -8,13 +8,13 @@ import 'start.dart';
 import 'package:provider/provider.dart';
 import '../components/wrapper.dart';
 
-class Results extends StatefulWidget {
+class Failed extends StatefulWidget {
   @override
-  _ResultsState createState() => _ResultsState();
+  _FailedState createState() => _FailedState();
 }
 
-class _ResultsState extends State<Results> {
-  final String astronauntLogo = 'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/Astronaut_re_8c33.svg';
+class _FailedState extends State<Failed> {
+  final String astronauntLogo = 'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/empty_xct9.svg';
 
   @override initState() {
     context.read<DataHandler>()?.loadQuestions();
@@ -44,7 +44,7 @@ class _ResultsState extends State<Results> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Final results',
+              'Nice try!',
               style: GoogleFonts.lato(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -81,7 +81,7 @@ class _ResultsState extends State<Results> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
                     child: Text(
-                      'Start again',
+                      'Try again',
                       style: GoogleFonts.lato(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

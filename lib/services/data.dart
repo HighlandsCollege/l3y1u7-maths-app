@@ -15,14 +15,14 @@ class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
       final res = await http.get(uri);
       if (res.statusCode == 200) {
         final Data data = dataFromJson(res.body);
-        getQuestions(data);
+        parseQuestions(data);
       }
     } catch (err) {
       print(err);
     }
   }
 
-  void getQuestions(Data data) {
+  void parseQuestions(Data data) {
     final mapData = _toMap(data);
     final rng = new Random();
     Map<String, String> map = Map.unmodifiable({
@@ -34,7 +34,7 @@ class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
     
     List<Tion> res = [];
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 30; i++) {
       final questionType = rng.nextInt(3) + 1; // change to 5 when divisions are done
       final questionNumber = rng.nextInt(100);
 
