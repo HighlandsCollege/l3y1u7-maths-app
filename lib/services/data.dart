@@ -1,69 +1,57 @@
-import 'dart:convert';
+import 'dart:math';
+import 'package:flutter/foundation.dart';
+import '../models/data_model.dart';
 import 'package:http/http.dart' as http;
 
-Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
+  List<Tion> _questions;
 
-String dataToJson(Data data) => json.encode(data.toJson());
+  List<Tion> get questions => _questions;
 
-final Uri quiz = Uri.parse('https://api.jsonbin.io/b/6064a26818592d461f042f03');
+  final Uri uri = Uri.parse('https://api.jsonbin.io/b/6064a26818592d461f042f03');
 
-Future<Data> getQuestions() async {
-  try {
-    final res = await http.get(quiz);
-    if (res.statusCode == 200) {
-      final Data questions = dataFromJson(res.body);
-      return questions;
+  void loadQuestions() async {
+    try {
+      final res = await http.get(uri);
+      if (res.statusCode == 200) {
+        final Data data = dataFromJson(res.body);
+        getQuestions(data);
+      }
+    } catch (err) {
+      print(err);
     }
-  } catch (err) {
-    print(err);
-    return null;
   }
-}
 
-class Data {
-  Data({
-      this.addition,
-      this.substraction,
-      this.multiplication,
-  });
+  void getQuestions(Data data) {
+    final mapData = _toMap(data);
+    final rng = new Random();
+    Map<String, String> map = Map.unmodifiable({
+      '1': 'addition',
+      '2': 'substraction',
+      '3': 'multiplication',
+      // '4': 'division'
+    });
+    
+    List<Tion> res = [];
 
-  List<Tion> addition;
-  List<Tion> substraction;
-  List<Tion> multiplication;
+    for (var i = 0; i < 3; i++) {
+      final questionType = rng.nextInt(3) + 1; // change to 5 when divisions are done
+      final questionNumber = rng.nextInt(100);
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-      addition: List<Tion>.from(json["addition"].map((x) => Tion.fromJson(x))),
-      substraction: List<Tion>.from(json["substraction"].map((x) => Tion.fromJson(x))),
-      multiplication: List<Tion>.from(json["multiplication"].map((x) => Tion.fromJson(x))),
-  );
+      res.add(mapData[map[questionType.toString()].toString()][questionNumber]);
+    }
 
-  Map<String, dynamic> toJson() => {
-      "addition": List<dynamic>.from(addition.map((x) => x.toJson())),
-      "substraction": List<dynamic>.from(substraction.map((x) => x.toJson())),
-      "multiplication": List<dynamic>.from(multiplication.map((x) => x.toJson())),
-  };
-}
+    _questions = res;
 
-class Tion {
-  Tion({
-      this.question,
-      this.buffer,
-      this.answer,
-  });
+    notifyListeners();
+  }
 
-  String question;
-  List<int> buffer;
-  int answer;
-
-  factory Tion.fromJson(Map<String, dynamic> json) => Tion(
-      question: json["question"],
-      buffer: List<int>.from(json["buffer"].map((x) => x)),
-      answer: json["answer"],
-  );
-
-  Map<String, dynamic> toJson() => {
-      "question": question,
-      "buffer": List<dynamic>.from(buffer.map((x) => x)),
-      "answer": answer,
-  };
+  Map<String, List<Tion>> _toMap(Data data) {
+    return {
+      'addition': data.addition,
+      'substraction': data.substraction,
+      'multiplication': data.multiplication,
+      // 'division': data.division
+    };
+  }
 }
