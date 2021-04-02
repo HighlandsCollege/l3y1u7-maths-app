@@ -17,11 +17,10 @@ class _StartState extends State<Start> {
   final String mathsLogo = 'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/mathematics_4otb.svg';
 
   @override
-  void initState() {
-    context.read<DataHandler>()?.loadQuestions();
+  void didChangeDependencies() {
     context.read<ScoreHandler>()?.initScore();
 
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override

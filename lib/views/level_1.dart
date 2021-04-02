@@ -97,7 +97,7 @@ class _Level1 extends State<Level1> {
                             style: GoogleFonts.lato(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey[800]
+                              color: selectedNumber == shuffled[index] ? Colors.grey[200] : Colors.grey[800]
                             )
                           )
                         ),
@@ -109,7 +109,9 @@ class _Level1 extends State<Level1> {
             ),
             Spacer(),
             GestureDetector(
-              onTap: () => _verifyAnswer(context, selectedNumber),
+              onTap: () => selectedNumber != null 
+                ? _verifyAnswer(context, selectedNumber) 
+                : null,
               child: Container(
                 width: 150,
                 height: 50,

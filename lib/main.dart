@@ -23,12 +23,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // @override
-  // void didChangeDependencies() {
-  //   context.read<DataHandler>()?.loadQuestions();
+  @override
+  void didChangeDependencies() {
+    context.read<DataHandler>()?.loadQuestions();
 
-  //   super.didChangeDependencies();
-  // }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
