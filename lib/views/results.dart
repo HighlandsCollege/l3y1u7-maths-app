@@ -1,8 +1,10 @@
 import 'package:app/components/page_navigator.dart';
+import 'package:app/services/score.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'start.dart';
+import 'package:provider/provider.dart';
 import '../components/wrapper.dart';
 
 class Results extends StatelessWidget {
@@ -10,6 +12,15 @@ class Results extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int score = context.watch<ScoreHandler>().score;
+    final String msg = score == 0 
+      ? 'Terrible' 
+      : score == 1 
+        ? 'Could do better' 
+        : score == 2 
+          ? 'Good job' 
+          : 'Perfect';
+
     return Scaffold(
       body: Wrapper(
         child: Column(
@@ -25,7 +36,7 @@ class Results extends StatelessWidget {
               )
             ),
             Text(
-              'You scored 3 out of 3! Perfect!',
+              'You scored $score out of 3! $msg!',
               style: GoogleFonts.lato(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

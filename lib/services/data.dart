@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:flutter/foundation.dart';
-import '../models/data.dart';
+import '../models/data_model.dart';
 import 'package:http/http.dart' as http;
 
-class Services with ChangeNotifier, DiagnosticableTreeMixin {
-  List<Tion> questions;
+class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
+  List<Tion> _questions;
+
+  List<Tion> get questions => _questions;
 
   final Uri uri = Uri.parse('https://api.jsonbin.io/b/6064a26818592d461f042f03');
 
@@ -32,19 +34,19 @@ class Services with ChangeNotifier, DiagnosticableTreeMixin {
     
     List<Tion> res = [];
 
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 3; i++) {
       final questionType = rng.nextInt(3) + 1; // change to 5 when divisions are done
       final questionNumber = rng.nextInt(100);
 
       res.add(mapData[map[questionType.toString()].toString()][questionNumber]);
     }
 
-    questions = res;
+    _questions = res;
 
     notifyListeners();
   }
 
-  static Map<String, List<Tion>> _toMap(Data data) {
+  Map<String, List<Tion>> _toMap(Data data) {
     return {
       'addition': data.addition,
       'substraction': data.substraction,
