@@ -1,41 +1,47 @@
 import 'package:flutter/material.dart';
 
-class ProgressBar extends StatefulWidget {
-  ProgressBar({
+class TimerProgress extends StatefulWidget {
+  TimerProgress({
     Key key,
-    @required this.begin,
-    @required this.end
+    @required this.time,
+    @required this.onCompleted
   }) : super(key: key);
 
-  final double begin;
-  final double end;
+  final int time;
+  final Function onCompleted;
 
   @override
-  _ProgressBarState createState() => _ProgressBarState();
+  _TimerProgressState createState() => _TimerProgressState();
 }
 
-class _ProgressBarState extends State<ProgressBar> with SingleTickerProviderStateMixin {
+class _TimerProgressState extends State<TimerProgress> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _widthAnimation;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     _controller = AnimationController(
-      duration: Duration(milliseconds: 600),
+      duration: Duration(seconds: widget.time),
       vsync: this
     );
 
     _widthAnimation = Tween<double>(
-      begin: widget.begin,
-      end: widget.end
+      begin: 200,
+      end: 0
     ).animate(CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut
+      curve: Curves.linear
     ));
+
+    _controller.addListener(() {
+      if (_controller.value == 1) {
+        widget.onCompleted();
+      }
+    });
 
     _controller.forward();
 
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
@@ -58,7 +64,7 @@ class _ProgressBarState extends State<ProgressBar> with SingleTickerProviderStat
                 height: 10,
                 width: _widthAnimation.value,
                 decoration: BoxDecoration(
-                  color: Color(0xff6C63FF),
+                  color: Color(0xffF50057),
                   borderRadius: BorderRadius.all(Radius.circular(10))
                 )
               );
