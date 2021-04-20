@@ -87,9 +87,8 @@ class _Level2 extends State<Level2> {
                 color: Colors.grey[200]
               )
             ),
-            Text('$timer'),
             TimerProgress(
-              time: timer * 10,
+              time: timer,
               onCompleted: () => navigate(context, Failed()),  
             ),
             Spacer(),

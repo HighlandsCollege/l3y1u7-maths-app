@@ -31,10 +31,8 @@ class _TimerProgressState extends State<TimerProgress> with TickerProviderStateM
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.linear
-    ));
-
-    _controller.addListener(() {
-      if (_controller.value == 1) {
+    ))..addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         widget.onCompleted();
       }
     });
@@ -42,6 +40,15 @@ class _TimerProgressState extends State<TimerProgress> with TickerProviderStateM
     _controller.forward();
 
     super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(old) {
+    _controller.duration = Duration(seconds: widget.time);
+    _controller.reset();
+    _controller.forward();
+
+    super.didUpdateWidget(old);
   }
 
   @override

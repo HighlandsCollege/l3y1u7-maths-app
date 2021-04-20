@@ -1,14 +1,14 @@
 const checkBuffer = (buffer, res) => {
     for (let i = 0; i < buffer.lenght; i++) {
         if (buffer[i] === res) {
-            buffer[i] = addOne(buffer[i]) 
+            buffer[i] = addRandom(buffer[i]) 
         }
     }
 
     return [...buffer]
 } 
 
-const addOne = (num) => num + 1
+const addRandom = (num) => num + Math.random() * 10
 
 const add = (num1, num2) => {
     const buffer = [
