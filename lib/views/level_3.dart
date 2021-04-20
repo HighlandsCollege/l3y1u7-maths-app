@@ -88,7 +88,7 @@ class _Level3 extends State<Level3> {
               )
             ),
             TimerProgress(
-              time: timer * 10,
+              time: timer,
               onCompleted: () => navigate(context, Failed()),  
             ),
             Spacer(),
