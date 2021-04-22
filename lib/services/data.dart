@@ -8,7 +8,7 @@ class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
 
   List<Tion> get questions => _questions;
 
-  final Uri uri = Uri.parse('https://api.jsonbin.io/b/6064a26818592d461f042f03');
+  final Uri uri = Uri.parse('https://api.jsonbin.io/b/608163efa2213a0c1428c071');
 
   void loadQuestions() async {
     try {
@@ -29,13 +29,13 @@ class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
       '1': 'addition',
       '2': 'substraction',
       '3': 'multiplication',
-      // '4': 'division'
+      '4': 'division'
     });
     
     List<Tion> res = [];
 
     for (var i = 0; i < 30; i++) {
-      final questionType = rng.nextInt(3) + 1; // change to 5 when divisions are done
+      final questionType = rng.nextInt(4) + 1;
       final questionNumber = rng.nextInt(100);
 
       res.add(mapData[map[questionType.toString()].toString()][questionNumber]);
