@@ -51,7 +51,7 @@ class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
       'addition': data.addition,
       'substraction': data.substraction,
       'multiplication': data.multiplication,
-      // 'division': data.division
+      'division': data.division
     };
   }
 }
