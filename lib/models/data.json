@@ -212,7 +212,7 @@
     },
     {
       "question": "What is 11 + 4",
-      "buffer": [15, 21, 1],
+      "buffer": [16, 21, 1],
       "answer": 15
     },
     {
@@ -1482,7 +1482,7 @@
     {
       "question": "What is 10 x 10",
       "buffer": [38, 47, 12],
-      "answer": 101
+      "answer": 100
     },
     {
       "question": "What is 2 x 3",

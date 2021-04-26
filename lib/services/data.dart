@@ -8,7 +8,7 @@ class DataHandler with ChangeNotifier, DiagnosticableTreeMixin {
 
   List<Tion> get questions => _questions;
 
-  final Uri uri = Uri.parse('https://api.jsonbin.io/b/608163efa2213a0c1428c071');
+  final Uri uri = Uri.parse('https://api.jsonbin.io/b/608163efa2213a0c1428c071/2');
 
   void loadQuestions() async {
     try {
