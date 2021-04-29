@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 

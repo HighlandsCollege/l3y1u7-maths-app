@@ -9,9 +9,7 @@ void main() {
     );
 
     final titleFinder = find.text('Level 1');
-    final questionFinder = find.text('Question: What is 4 + 9?');
 
     expect(titleFinder, findsOneWidget);
-    expect(questionFinder, findsOneWidget);
   });
 }
