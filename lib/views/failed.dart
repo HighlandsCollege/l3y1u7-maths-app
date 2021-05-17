@@ -1,3 +1,4 @@
+import 'package:app/components/components.dart';
 import 'package:app/components/page_navigator.dart';
 import 'package:app/services/data.dart';
 import 'package:app/services/score.dart';
@@ -18,6 +19,7 @@ class _FailedState extends State<Failed> {
 
   @override initState() {
     context.read<DataHandler>()?.loadQuestions();
+    play('https://soundbible.com/mp3/Crowd%20Boo%203-SoundBible.com-595364990.mp3');
 
     super.initState();
   }
