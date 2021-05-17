@@ -1,4 +1,5 @@
 import 'package:app/components/components.dart';
+import 'package:app/components/page_navigator.dart';
 import 'package:app/services/data.dart';
 import 'package:app/services/score.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'start.dart';
 import 'package:provider/provider.dart';
+import '../components/wrapper.dart';
 
 class Failed extends StatefulWidget {
   @override
